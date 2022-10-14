@@ -1,7 +1,8 @@
-export async function uploadFile() {
-  return Promise.resolve();
-}
-
-export async function deleteFile() {
-  return Promise.resolve();
-}
+module.exports = {
+  uploadFile: async function () {
+    return Promise.resolve();
+  },
+  deleteFile: async function () {
+    return Promise.resolve();
+  },
+};

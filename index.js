@@ -1,4 +1,4 @@
-import uploadFile from "./lib/upload.js";
-import deleteFile from "./lib/delete.js";
+const uploadFile = require("./lib/upload.js");
+const deleteFile = require("./lib/delete.js");
 
-export { uploadFile, deleteFile };
+module.exports = { uploadFile, deleteFile };

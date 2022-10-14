@@ -1,12 +1,11 @@
 {
   "name": "ipfs-storage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "IPFS storage API providers.",
   "repository": {
     "type": "git",
     "url": "https://github.com/alexbakers/ipfs-storage"
   },
-  "type": "module",
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
