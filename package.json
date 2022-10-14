@@ -1,0 +1,35 @@
+{
+  "name": "ipfs-storage",
+  "version": "1.0.0",
+  "description": "IPFS storage API providers.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexbakers/ipfs-storage"
+  },
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/alexbakers/ipfs-storage/issues"
+  },
+  "dependencies": {
+    "@pinata/sdk": "^1.1.26",
+    "aws-sdk": "^2.1206.0",
+    "axios": "^0.27.2",
+    "dotenv": "^10.0.0",
+    "dotenv-expand": "^5.1.0",
+    "glob": "^8.0.3",
+    "ipfs-car": "^0.8.1",
+    "web3.storage": "^4.3.0",
+    "cids": "^1.1.9"
+  },
+  "keywords": [
+    "ipfs",
+    "moralis",
+    "web3",
+    "pinata",
+    "filebase"
+  ]
+}
