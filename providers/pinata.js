@@ -7,7 +7,7 @@ module.exports = {
     file = { hash: "", ext: "", stream: "", buffer: "" }
   ) {
     const data = new FormData();
-    data.append("file", file.buffer, {
+    data.append("file", file.stream || file.buffer, {
       filename: `${file.hash}${file.ext}`,
     });
     data.append("pinataOptions", '{"cidVersion": 1}');
@@ -26,10 +26,7 @@ module.exports = {
 
     return Promise.resolve(`https://${res.data.IpfsHash}.ipfs.dweb.link`);
   },
-  deleteFile: async function (
-    connect = { jwt: "" },
-    file = { url: "", hash: "", ext: "", stream: "", buffer: "" }
-  ) {
+  deleteFile: async function (connect = { jwt: "" }, file = { url: "" }) {
     const config = {
       method: "delete",
       url: `https://api.pinata.cloud/pinning/unpin/${file.url.substring(
