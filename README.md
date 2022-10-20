@@ -1,8 +1,10 @@
 # IPFS STOTAGE API PROVIDERS
 
+<img alt="Create IPFS App" src="https://raw.githubusercontent.com/alexbakers/ipfs-storage/main/banner.png" />
+
 - [x] Filebase [<a href="https://filebase.com">filebase.com</a>]
-- [ ] Moralis
-- [ ] Web3
-- [ ] Pinata
+- [x] Fleek [<a href="https://fleek.co">fleek.co</a>]
+- [x] Web3 [<a href="https://web3.storage">web3.storage</a>]
+- [x] Pinata [<a href="https://pinata.cloud">pinata.cloud</a>]
 
 `(c)` Alex Baker

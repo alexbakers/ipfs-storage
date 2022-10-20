@@ -1,6 +1,6 @@
 {
   "name": "ipfs-storage",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "IPFS storage API providers.",
   "repository": {
     "type": "git",
@@ -17,12 +17,12 @@
     "@pinata/sdk": "^1.1.26",
     "aws-sdk": "^2.1206.0",
     "axios": "^0.27.2",
+    "cids": "^1.1.9",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
     "glob": "^8.0.3",
     "ipfs-car": "^0.8.1",
-    "web3.storage": "^4.3.0",
-    "cids": "^1.1.9"
+    "web3.storage": "^4.3.0"
   },
   "keywords": [
     "ipfs",
