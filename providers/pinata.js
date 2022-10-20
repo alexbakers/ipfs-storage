@@ -1,18 +1,18 @@
-var axios = require("axios");
-var FormData = require("form-data");
+const axios = require("axios");
+const FormData = require("form-data");
 
 module.exports = {
   uploadFile: async function (
     connect = { jwt: "" },
     file = { hash: "", ext: "", stream: "", buffer: "" }
   ) {
-    var data = new FormData();
+    const data = new FormData();
     data.append("file", file.buffer, {
       filename: `${file.hash}${file.ext}`,
     });
     data.append("pinataOptions", '{"cidVersion": 1}');
 
-    var config = {
+    const config = {
       method: "post",
       url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
       headers: {
@@ -30,7 +30,7 @@ module.exports = {
     connect = { jwt: "" },
     file = { url: "", hash: "", ext: "", stream: "", buffer: "" }
   ) {
-    var config = {
+    const config = {
       method: "delete",
       url: `https://api.pinata.cloud/pinning/unpin/${file.url.substring(
         file.url.indexOf("/") + 2,

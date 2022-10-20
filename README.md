@@ -1,6 +1,6 @@
 # IPFS STOTAGE API PROVIDERS
 
-<img alt="Create IPFS App" src="https://raw.githubusercontent.com/alexbakers/ipfs-storage/main/banner.png" />
+<img alt="IPFS STOTAGE API PROVIDERS" src="https://raw.githubusercontent.com/alexbakers/ipfs-storage/main/banner.png" />
 
 - [x] Filebase [<a href="https://filebase.com">filebase.com</a>]
 - [x] Fleek [<a href="https://fleek.co">fleek.co</a>]
