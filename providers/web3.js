@@ -10,7 +10,9 @@ module.exports = {
     if (file.buffer) {
       file.stream = () => Readable.from(file.buffer);
     } else if (file.stream) {
-      file.stream = () => file.stream;
+      const s = file.stream;
+      file.name = `${file.hash}${file.ext}`;
+      file.stream = () => s;
     }
     const cid = await storage.put([file], {
       name: `${file.hash}${file.ext}`,
