@@ -25,7 +25,6 @@ jobs:
           PINATA_JWT: ${{ secrets.PINATA_JWT }}
           WEB3_TOKEN: ${{ secrets.WEB3_TOKEN }}
 
-jobs:
   publish-npm:
     needs: test
     runs-on: ubuntu-latest
