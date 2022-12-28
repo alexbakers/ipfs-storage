@@ -5,11 +5,33 @@ on:
     branches: [main]
 
 jobs:
-  publish-npm:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install -g yarn
+      - run: yarn
+      - run: FILEBASE_KEY=$FILEBASE_KEY FILEBASE_SECRET=$FILEBASE_SECRET FILEBASE_BUCKET=$FILEBASE_BUCKET FLEEK_KEY=$FLEEK_KEY FLEEK_SECRET=$FLEEK_SECRET FLEEK_BUCKET=$FLEEK_BUCKET PINATA_JWT=$PINATA_JWT WEB3_TOKEN=$WEB3_TOKEN node test
+        env:
+          FILEBASE_KEY: ${{ secrets.FILEBASE_KEY }}
+          FILEBASE_SECRET: ${{ secrets.FILEBASE_SECRET }}
+          FILEBASE_BUCKET: ${{ secrets.FILEBASE_BUCKET }}
+          FLEEK_KEY: ${{ secrets.FLEEK_KEY }}
+          FLEEK_SECRET: ${{ secrets.FLEEK_SECRET }}
+          FLEEK_BUCKET: ${{ secrets.FLEEK_BUCKET }}
+          PINATA_JWT: ${{ secrets.PINATA_JWT }}
+          WEB3_TOKEN: ${{ secrets.WEB3_TOKEN }}
+
+jobs:
+  publish-npm:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
