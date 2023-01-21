@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const multiformats = require("multiformats/cid");
+const { cid: multiformats } = require("multiformats");
 
 module.exports = {
   uploadFile: async function (
