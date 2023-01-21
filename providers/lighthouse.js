@@ -1,6 +1,6 @@
 const axios = require("axios");
 const FormData = require("form-data");
-const { cid: multiformats } = require("multiformats");
+const CID = require("multiformats/cid").CID;
 
 module.exports = {
   uploadFile: async function (
@@ -24,7 +24,7 @@ module.exports = {
 
     const res = await axios(config);
 
-    const cid = multiformats.CID.parse(res.data["Hash"]);
+    const cid = CID.parse(res.data["Hash"]);
     return Promise.resolve(`https://${cid.toV1().toString()}.ipfs.dweb.link`);
   },
   deleteFile: async function () {
