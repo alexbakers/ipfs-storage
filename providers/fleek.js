@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const CID = require("cids");
+const multiformats = require("multiformats/cid");
 
 module.exports = {
   uploadFile: async function (
@@ -26,8 +26,8 @@ module.exports = {
       const request = s3.putObject(params);
       request.on("httpHeaders", (statusCode, headers) => {
         if (statusCode !== 200) reject("ERROR");
-        const cid = new CID(headers["x-fleek-ipfs-hash"]);
-        return resolve(`https://${cid}.ipfs.cf-ipfs.com`);
+        const cid = multiformats.CID.parse(headers["x-fleek-ipfs-hash"]);
+        return resolve(`https://${cid.toV1().toString()}.ipfs.cf-ipfs.com`);
       });
       request.send();
     });
