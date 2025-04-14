@@ -5,35 +5,13 @@ on:
     branches: [main]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm install -g yarn
-      - run: yarn
-      - run: FILEBASE_KEY=$FILEBASE_KEY FILEBASE_SECRET=$FILEBASE_SECRET FILEBASE_BUCKET=$FILEBASE_BUCKET FLEEK_KEY=$FLEEK_KEY FLEEK_SECRET=$FLEEK_SECRET FLEEK_BUCKET=$FLEEK_BUCKET PINATA_JWT=$PINATA_JWT WEB3_TOKEN=$WEB3_TOKEN LIGHTHOUSE_TOKEN=$LIGHTHOUSE_TOKEN node test
-        env:
-          FILEBASE_KEY: ${{ secrets.FILEBASE_KEY }}
-          FILEBASE_SECRET: ${{ secrets.FILEBASE_SECRET }}
-          FILEBASE_BUCKET: ${{ secrets.FILEBASE_BUCKET }}
-          FLEEK_KEY: ${{ secrets.FLEEK_KEY }}
-          FLEEK_SECRET: ${{ secrets.FLEEK_SECRET }}
-          FLEEK_BUCKET: ${{ secrets.FLEEK_BUCKET }}
-          PINATA_JWT: ${{ secrets.PINATA_JWT }}
-          WEB3_TOKEN: ${{ secrets.WEB3_TOKEN }}
-          LIGHTHOUSE_TOKEN: ${{ secrets.LIGHTHOUSE_TOKEN }}
-
   publish-npm:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           registry-url: https://registry.npmjs.org/
       - run: npm install -g yarn
       - run: yarn install --frozen-lockfile

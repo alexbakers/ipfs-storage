@@ -1,33 +1,49 @@
-const axios = require("axios");
-const FormData = require("form-data");
-const CID = require("multiformats/cid").CID;
+import lighthouse from "@lighthouse-web3/sdk";
+import { CID } from "multiformats";
 
-module.exports = {
-  uploadFile: async function (
-    connect = { token: "" },
-    file = { hash: "", ext: "", stream: "", buffer: "" }
-  ) {
-    const data = new FormData();
-    data.append("file", file.stream || file.buffer, {
-      filename: `${file.hash}${file.ext}`,
-    });
+const uploadFile = async function (
+  connect = { token: "" },
+  file = { hash: "", ext: "", stream: "", buffer: "" }
+) {
+  if (!connect.token) {
+    throw new Error("Lighthouse API token is required.");
+  }
 
-    const config = {
-      method: "post",
-      url: "https://node.lighthouse.storage/api/v0/add",
-      headers: {
-        Authorization: `Bearer ${connect.token}`,
-        ...data.getHeaders(),
-      },
-      data: data,
-    };
+  const apiKey = connect.token;
+  const buffer = file.buffer || (file.stream ? Buffer.from(file.stream) : null);
 
-    const res = await axios(config);
+  if (!buffer) {
+    throw new Error("Lighthouse upload requires file buffer or stream.");
+  }
 
-    const cid = CID.parse(res.data["Hash"]);
-    return Promise.resolve(`https://${cid.toV1().toString()}.ipfs.dweb.link`);
-  },
-  deleteFile: async function () {
-    return Promise.resolve();
-  },
+  try {
+    const uploadResponse = await lighthouse.uploadBuffer(buffer, apiKey);
+
+    if (!uploadResponse?.data?.Hash) {
+      throw new Error(
+        "Lighthouse upload failed: Invalid response format or missing Hash."
+      );
+    }
+
+    const cid = CID.parse(uploadResponse.data.Hash);
+    // Note: Lighthouse docs use gateway.lighthouse.storage, using dweb.link for consistency here.
+    return `https://${cid.toV1().toString()}.ipfs.dweb.link`;
+  } catch (err) {
+    console.error(`Lighthouse upload failed:`, err);
+    const errorMessage =
+      err.response?.data?.message || err.message || "Unknown error";
+    throw new Error(`Lighthouse upload failed: ${errorMessage}`);
+  }
 };
+
+const deleteFile = async function (
+  connect = { token: "" }, // Added connect param for consistency
+  file = { cid: "" }
+) {
+  // Implementation requires finding the correct SDK method for unpinning.
+  throw new Error(
+    "Lighthouse deleteFile not implemented. Requires SDK investigation."
+  );
+};
+
+export { deleteFile, uploadFile };
